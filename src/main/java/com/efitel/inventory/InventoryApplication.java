@@ -1,13 +1,13 @@
-package com.efitel.inventary;
+package com.efitel.inventory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class InventaryApplication {
+public class InventoryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(InventaryApplication.class, args);
+		SpringApplication.run(InventoryApplication.class, args);
 	}
 
 }
