@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,5 +55,11 @@ public class ItemController {
 	ResponseEntity<ItemEntity> updateItemByName(@RequestBody UpdateItemDTO Item) {
 		return new ResponseEntity<>(itemService.updateItem(Item), HttpStatus.OK);
 	}
+	
+	@DeleteMapping("/deleteByItemName/{itemName}")
+	ResponseEntity<String> deleteByItemName(@PathVariable String itemName){
+		return new ResponseEntity<>(itemService.deleteByItemName(itemName), HttpStatus.OK);
+	}
+	
 
 }

@@ -18,6 +18,6 @@ public interface CategoryService {
 
 	CategoryEntity updateCategoryByName(UpdateCategoryDTO categoryDTO);
 	
-	String deleteCategoryByName(String categoryName);
+	String deleteByCategoryName(String categoryName);
 
 }

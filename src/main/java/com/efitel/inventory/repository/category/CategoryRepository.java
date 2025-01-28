@@ -6,11 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 
+import jakarta.transaction.Transactional;
+
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
 	CategoryEntity findByCategoryNameIgnoreCase(String categoryName);
 
 	List<CategoryEntity> findByCategoryNameContainingIgnoreCase(String categoryName);
 
-	String deleteByCategoryNameIgnoreCase(String categoryName);
+	@Transactional
+	void deleteByCategoryNameIgnoreCase(String categoryName);
 
 }

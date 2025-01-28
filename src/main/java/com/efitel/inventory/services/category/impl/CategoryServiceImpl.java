@@ -50,13 +50,14 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 	
 	@Override
-	public String deleteCategoryByName(String categoryName) {
+	public String deleteByCategoryName(String categoryName) {
 		try {
 			categoryRepository.deleteByCategoryNameIgnoreCase(categoryName);
 			return "Category deleted succesfully";
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
+
 	}
 
 }

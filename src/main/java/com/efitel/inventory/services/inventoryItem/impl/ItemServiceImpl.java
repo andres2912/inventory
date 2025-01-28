@@ -10,6 +10,7 @@ import com.efitel.inventory.models.dto.inventoryItem.CreateItemDTO;
 import com.efitel.inventory.models.dto.inventoryItem.UpdateItemDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.models.entity.inventoryItem.ItemEntity;
+import com.efitel.inventory.repository.category.CategoryRepository;
 import com.efitel.inventory.repository.inventoryitem.ItemRepository;
 import com.efitel.inventory.services.category.CategoryService;
 import com.efitel.inventory.services.inventoryItem.ItemService;
@@ -67,5 +68,15 @@ public class ItemServiceImpl implements ItemService {
 			updateItem.setCategory(category);
 		}
 		return itemRepository.save(updateItem);
+	}
+	
+	@Override
+	public String deleteByItemName(String itemName) {
+		try {
+			itemRepository.deleteByItemName(itemName);
+			return "Item deleted succesfully";
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

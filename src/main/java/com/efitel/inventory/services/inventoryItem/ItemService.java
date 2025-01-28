@@ -18,5 +18,7 @@ public interface ItemService {
 	List<ItemEntity> getAllItems();
 
 	ItemEntity updateItem(UpdateItemDTO itemDTO);
+	
+	String deleteByItemName(String itemName);
 
 }

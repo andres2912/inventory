@@ -6,7 +6,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.efitel.inventory.models.entity.inventoryItem.ItemEntity;
 
+import jakarta.transaction.Transactional;
+
 public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 	List<ItemEntity> findByItemNameContainingIgnoreCase(String itemName);
+
 	ItemEntity findByItemNameIgnoreCase(String itemName);
+
+	@Transactional
+	void deleteByItemName(String itemName);
 }

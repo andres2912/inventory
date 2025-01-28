@@ -68,8 +68,8 @@ public class ItemEntity {
 		return category;
 	}
 
-	public void setCategory(CategoryEntity categoriId) {
-		this.category = categoriId;
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
 	}
 
 }
