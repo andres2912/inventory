@@ -52,7 +52,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemEntity> getAllItems() {
+	public List<ItemEntity> getItems() {
 		return itemRepository.findAll();
 
 	}

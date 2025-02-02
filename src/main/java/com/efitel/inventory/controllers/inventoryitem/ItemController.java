@@ -48,7 +48,7 @@ public class ItemController {
 
 	@GetMapping("/getAllItems")
 	ResponseEntity<List<ItemEntity>> getAllItems() {
-		return new ResponseEntity<>(itemService.getAllItems(), HttpStatus.OK);
+		return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
 	}
 
 	@PatchMapping("/updateItemByName")

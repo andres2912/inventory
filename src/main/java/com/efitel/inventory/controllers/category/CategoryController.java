@@ -36,12 +36,12 @@ public class CategoryController {
 
 	@GetMapping("/getCategoryByName/{categoryName}")
 	public ResponseEntity<CategoryEntity> getCategoryByName(@PathVariable String categoryName) {
-		return new ResponseEntity<>(categoryService.categoryByName(categoryName), HttpStatus.OK);
+		return new ResponseEntity<>(categoryService.getCategoryByName(categoryName), HttpStatus.OK);
 	}
 
 	@GetMapping("/categoriesByName/{categoryName}")
 	public ResponseEntity<List<CategoryEntity>> categoriesByName(@PathVariable String categoryName) {
-		return new ResponseEntity<>(categoryService.categoriesByName(categoryName), HttpStatus.OK);
+		return new ResponseEntity<>(categoryService.getCategoriesByName(categoryName), HttpStatus.OK);
 	}
 
 	@GetMapping("/getCategories")

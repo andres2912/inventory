@@ -26,11 +26,11 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 	
 	@Override
-	public CategoryEntity categoryByName(String categoryName) {
+	public CategoryEntity getCategoryByName(String categoryName) {
 		return categoryRepository.findByCategoryNameIgnoreCase(categoryName);
 	}
 	@Override
-	public List<CategoryEntity> categoriesByName(String categoryName) {
+	public List<CategoryEntity> getCategoriesByName(String categoryName) {
 		return categoryRepository.findByCategoryNameContainingIgnoreCase(categoryName);
 
 	}
@@ -43,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	public CategoryEntity updateCategoryByName(UpdateCategoryDTO categoryDTO) {
-		CategoryEntity updateCategory = categoryByName(categoryDTO.getCurrentCategoryName());
+		CategoryEntity updateCategory = getCategoryByName(categoryDTO.getCurrentCategoryName());
 		updateCategory.setCategoryName(categoryDTO.getNewCategoryName());
 		updateCategory.setDescription(categoryDTO.getDescription());
 		return categoryRepository.save(updateCategory);
