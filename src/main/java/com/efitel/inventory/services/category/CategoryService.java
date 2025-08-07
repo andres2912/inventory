@@ -1,6 +1,7 @@
 package com.efitel.inventory.services.category;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
@@ -23,7 +24,7 @@ public interface CategoryService {
 	 * @return {@link CategoryEntity} with the specified ID, or {@code null} if no
 	 *         category is found.
 	 */
-	CategoryEntity getCategoryById(Long categoryId);
+	CategoryEntity findCategoryById(Long categoryId);
 
 	/**
 	 * Retrieves {@link CategoryEntity} that exactly matches the given name, ignoring

@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "category")
@@ -17,6 +19,8 @@ public class CategoryEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
 	private Long categoryId;
+	@NotNull(message = "The category name is mandatory")
+	@NotBlank(message = "The category name is mandatory")
 	@Column(name = "category_name", nullable = false, unique = true)
 	private String categoryName;
 	@Column(columnDefinition = "TEXT")

@@ -18,6 +18,8 @@ import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.services.category.CategoryService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
@@ -25,13 +27,13 @@ public class CategoryController {
 	CategoryService categoryService;
 
 	@PostMapping
-	public ResponseEntity<CategoryEntity> createCategory(@RequestBody CategoryEntity categoryEntity) {
+	public ResponseEntity<CategoryEntity> createCategory(@Valid @RequestBody CategoryEntity categoryEntity) {
 		return new ResponseEntity<>(categoryService.createCategory(categoryEntity), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getCategoryById/{categoryId}")
 	public ResponseEntity<CategoryEntity> getCategoryById(@PathVariable Long categoryId) {
-		return new ResponseEntity<>(categoryService.getCategoryById(categoryId), HttpStatus.OK);
+		return new ResponseEntity<>(categoryService.findCategoryById(categoryId), HttpStatus.OK);
 	}
 
 	@GetMapping("/getCategoryByName/{categoryName}")
