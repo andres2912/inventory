@@ -3,6 +3,7 @@ package com.efitel.inventory.services.category;
 import java.util.List;
 import java.util.Optional;
 
+import com.efitel.inventory.models.dto.category.CategoryDTO;
 import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 
@@ -14,7 +15,7 @@ public interface CategoryService {
 	 *                       {@code null}.
 	 * @return The created {@link CategoryEntity} with generated ID field populated.
 	 */
-	CategoryEntity createCategory(CategoryEntity categoryEntity);
+	CategoryEntity createCategory(CategoryDTO categoryEntity);
 
 	/**
 	 * Retrieves a category by its unique identifier.

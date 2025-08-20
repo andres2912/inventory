@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.efitel.inventory.models.dto.category.CategoryDTO;
 import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.services.category.CategoryService;
@@ -27,8 +28,8 @@ public class CategoryController {
 	CategoryService categoryService;
 
 	@PostMapping
-	public ResponseEntity<CategoryEntity> createCategory(@Valid @RequestBody CategoryEntity categoryEntity) {
-		return new ResponseEntity<>(categoryService.createCategory(categoryEntity), HttpStatus.CREATED);
+	public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
+		return new ResponseEntity<>(categoryService.createCategory(categoryDTO), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getCategoryById/{categoryId}")

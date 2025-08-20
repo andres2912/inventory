@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import com.efitel.inventory.models.dto.category.CategoryDTO;
 import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.repository.category.CategoryRepository;
@@ -24,7 +25,8 @@ public class CategoryServiceImpl implements CategoryService {
 	MessageSource messageSource;
 
 	@Override
-	public CategoryEntity createCategory(CategoryEntity categoryEntity) {
+	public CategoryEntity createCategory(CategoryDTO categoryEntity) {
+		CategoryMapper
 			return categoryRepository.save(categoryEntity);
 	}
 
