@@ -33,27 +33,27 @@ public class CategoryController {
 	}
 
 	@GetMapping("/getCategoryById/{categoryId}")
-	public ResponseEntity<CategoryEntity> getCategoryById(@PathVariable Long categoryId) {
+	public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long categoryId) {
 		return new ResponseEntity<>(categoryService.findCategoryById(categoryId), HttpStatus.OK);
 	}
 
 	@GetMapping("/getCategoryByName/{categoryName}")
-	public ResponseEntity<CategoryEntity> getCategoryByName(@PathVariable String categoryName) {
+	public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String categoryName) {
 		return new ResponseEntity<>(categoryService.getCategoryByName(categoryName), HttpStatus.OK);
 	}
 
 	@GetMapping("/categoriesByName/{categoryName}")
-	public ResponseEntity<List<CategoryEntity>> categoriesByName(@PathVariable String categoryName) {
+	public ResponseEntity<List<CategoryDTO>> categoriesByName(@PathVariable String categoryName) {
 		return new ResponseEntity<>(categoryService.getCategoriesByName(categoryName), HttpStatus.OK);
 	}
 
 	@GetMapping("/getCategories")
-	public ResponseEntity<List<CategoryEntity>> getCategories() {
+	public ResponseEntity<List<CategoryDTO>> getCategories() {
 		return new ResponseEntity<>(categoryService.getCategories(), HttpStatus.OK);
 	}
 
 	@PatchMapping("/updateCategoryByName")
-	public ResponseEntity<CategoryEntity> updateCategoryByName(@RequestBody UpdateCategoryDTO categoryDTO) {
+	public ResponseEntity<CategoryDTO> updateCategoryByName(@RequestBody UpdateCategoryDTO categoryDTO) {
 		return new ResponseEntity<>(categoryService.updateCategoryByName(categoryDTO), HttpStatus.OK);
 	}
 

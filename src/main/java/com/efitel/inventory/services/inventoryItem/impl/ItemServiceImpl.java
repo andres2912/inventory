@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import com.efitel.inventory.mapper.category.CategoryMapper;
+import com.efitel.inventory.models.dto.category.CategoryDTO;
 import com.efitel.inventory.models.dto.inventoryItem.ItemDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.models.entity.inventoryItem.ItemEntity;
@@ -25,20 +27,24 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	MessageSource messageSource;
+	
+	@Autowired
+	CategoryMapper categoryMapper;
 
 	@Override
 	public ItemEntity createUpdateItem(ItemDTO itemDTO) {
-		CategoryEntity category = categoryService.findCategoryById(itemDTO.getCategoryId());
+		CategoryDTO categoryDTO = categoryService.findCategoryById(itemDTO.getCategoryId());
 		ItemEntity item;
 		if (itemDTO.getItemId() != null) {
 			item = findItemById(itemDTO.getItemId());
 		} else {
 			item = new ItemEntity();
 		}
+		CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(categoryDTO);
 		item.setItemName(itemDTO.getItemName());
 		item.setPrice(itemDTO.getPrice());
 		item.setDescription(itemDTO.getDescription());
-		item.setCategory(category);
+		item.setCategory(categoryEntity);
 		return itemRepository.save(item);
 		
 
