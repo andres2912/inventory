@@ -9,9 +9,9 @@ import com.efitel.inventory.models.entity.category.CategoryEntity;
 
 public interface CategoryService {
 	/**
-	 * Create and save a new category using the provided {@link CategoryEntity}.
+	 * Create and save a new category using the provided {@link CategoryDTO}.
 	 * 
-	 * @param categoryEntity The category entity to be created. Must not be
+	 * @param CategoryDTO The category to be created. Must not be
 	 *                       {@code null}.
 	 * @return The created {@link CategoryDTO} with generated ID field populated.
 	 */
@@ -28,7 +28,7 @@ public interface CategoryService {
 	CategoryDTO findCategoryById(Long categoryId);
 
 	/**
-	 * Retrieves {@link CategoryEntity} that exactly matches the given name, ignoring
+	 * Retrieves {@link CategoryDTO} that exactly matches the given name, ignoring
 	 * case sensitivity.
 	 * 
 	 * @param categoryName The exact name of the category to search. Must not be
@@ -43,7 +43,7 @@ public interface CategoryService {
 	 * 
 	 * @param categoryName The string to search for within category name. Must not
 	 *                     be {@code null}.
-	 * @return A list of {@link CategoryEntity} objects whose names contain the
+	 * @return A list of {@link CategoryDTO} objects whose names contain the
 	 *         provided string. The list may be empty if no matching categories are
 	 *         found.
 	 */
@@ -60,7 +60,7 @@ public interface CategoryService {
 	/**
 	 * Update a category by its name.
 	 * 
-	 * @param categoryDTO must contain the current category name and the new name.
+	 * @param categoryToUpdate must contain the current category name and the new name.
 	 *                    Both must not be {@code null}. The description is optional.
 	 * @return The updated {@link CategoryDTO}.
 	 */
