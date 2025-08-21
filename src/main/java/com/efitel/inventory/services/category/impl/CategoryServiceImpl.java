@@ -1,5 +1,6 @@
 package com.efitel.inventory.services.category.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import com.efitel.inventory.mapper.category.CategoryMapper;
 import com.efitel.inventory.models.dto.category.CategoryDTO;
 import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
@@ -23,45 +25,73 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	MessageSource messageSource;
+	
+	@Autowired
+	CategoryMapper categoryMapper;
 
 	@Override
-	public CategoryEntity createCategory(CategoryDTO categoryEntity) {
-		CategoryMapper
-			return categoryRepository.save(categoryEntity);
+	public CategoryDTO createCategory(CategoryDTO categoryDTO) {
+		CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(categoryDTO);
+		CategoryEntity saved = categoryRepository.save(categoryEntity);
+			return categoryMapper.toCategoryDTO(saved);
 	}
 
 	@Override
-	public CategoryEntity findCategoryById(Long categoryId) {
-		return categoryRepository.findById(categoryId).orElseThrow(() -> {
+	public CategoryDTO findCategoryById(Long categoryId) {		
+		CategoryEntity categoryEntity = categoryRepository.findById(categoryId).orElseThrow(() -> {
 			String errorMessage = messageSource.getMessage("notFound.category", new Object[] { categoryId },
 					Locale.getDefault());
 			return new EntityNotFoundException(errorMessage);
 		});
+		
+		return categoryMapper.toCategoryDTO(categoryEntity);
 	}	
 
 	@Override
-	public CategoryEntity getCategoryByName(String categoryName) {
-		return categoryRepository.findByCategoryNameIgnoreCase(categoryName);
+	public CategoryDTO getCategoryByName(String categoryName) {
+		CategoryEntity categoryEntity = categoryRepository.findByCategoryNameIgnoreCase(categoryName);
+		return categoryMapper.toCategoryDTO(categoryEntity);	
 	}
 
 	@Override
-	public List<CategoryEntity> getCategoriesByName(String categoryName) {
-		return categoryRepository.findByCategoryNameContainingIgnoreCase(categoryName);
+	public List<CategoryDTO> getCategoriesByName(String categoryName) {
+		List<CategoryEntity> categoryEntities = new ArrayList<>();
+		List<CategoryDTO> categoryDtoList = new ArrayList<>();
+		categoryEntities = categoryRepository.findByCategoryNameContainingIgnoreCase(categoryName);
+		
+		for (CategoryEntity category : categoryEntities) {
+			categoryDtoList.add(categoryMapper.toCategoryDTO(category));
+		}
+		
+		return categoryDtoList;
+		
+		
+		
 
 	}
 
 	@Override
-	public List<CategoryEntity> getCategories() {
-		return categoryRepository.findAll();
+	public List<CategoryDTO> getCategories() {
+		List<CategoryEntity> categoryEntities = new ArrayList<>();
+		List<CategoryDTO> categoryDtoList = new ArrayList<>();
+		categoryEntities = categoryRepository.findAll();
+		
+		for (CategoryEntity category : categoryEntities) {
+			categoryDtoList.add(categoryMapper.toCategoryDTO(category));
+		}
+		return categoryDtoList;
 
 	}
 
 	@Override
-	public CategoryEntity updateCategoryByName(UpdateCategoryDTO categoryDTO) {
-		CategoryEntity updateCategory = getCategoryByName(categoryDTO.getCurrentCategoryName());
-		updateCategory.setCategoryName(categoryDTO.getNewCategoryName());
-		updateCategory.setDescription(categoryDTO.getDescription());
-		return categoryRepository.save(updateCategory);
+	public CategoryDTO updateCategoryByName(UpdateCategoryDTO categoryToUpdate) {
+		CategoryDTO updateCategory = getCategoryByName(categoryToUpdate.getCurrentCategoryName());
+		updateCategory.setCategoryName(categoryToUpdate.getNewCategoryName());
+		updateCategory.setDescription(categoryToUpdate.getDescription());
+		CategoryEntity category = categoryMapper.toCategoryEntity(updateCategory);
+		CategoryEntity saved =  categoryRepository.save(category);
+		return categoryMapper.toCategoryDTO(saved);
+		
 	}
 
 	@Override

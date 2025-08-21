@@ -6,7 +6,7 @@ import com.efitel.inventory.mapper.CentralMappingConfig;
 import com.efitel.inventory.models.dto.category.CategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 
-@Mapper(config = CentralMappingConfig.class)
+@Mapper(config = CentralMappingConfig.class, componentModel = "spring")
 public interface CategoryMapper {
 	CategoryEntity toCategoryEntity(CategoryDTO categoryDTO);
 

@@ -13,19 +13,19 @@ public interface CategoryService {
 	 * 
 	 * @param categoryEntity The category entity to be created. Must not be
 	 *                       {@code null}.
-	 * @return The created {@link CategoryEntity} with generated ID field populated.
+	 * @return The created {@link CategoryDTO} with generated ID field populated.
 	 */
-	CategoryEntity createCategory(CategoryDTO categoryEntity);
+	CategoryDTO createCategory(CategoryDTO categoryDTO);
 
 	/**
 	 * Retrieves a category by its unique identifier.
 	 * 
 	 * @param categoryId The ID of the category to retrieve. Must not be
 	 *                   {@code null}.
-	 * @return {@link CategoryEntity} with the specified ID, or {@code null} if no
+	 * @return {@link CategoryDTO} with the specified ID, or {@code null} if no
 	 *         category is found.
 	 */
-	CategoryEntity findCategoryById(Long categoryId);
+	CategoryDTO findCategoryById(Long categoryId);
 
 	/**
 	 * Retrieves {@link CategoryEntity} that exactly matches the given name, ignoring
@@ -33,9 +33,9 @@ public interface CategoryService {
 	 * 
 	 * @param categoryName The exact name of the category to search. Must not be
 	 *                     {@code null}.
-	 * @return The matching {@link CategoryEntity}, or {@code null} if no match is found.
+	 * @return The matching {@link CategoryDTO}, or {@code null} if no match is found.
 	 */
-	CategoryEntity getCategoryByName(String categoryName);
+	CategoryDTO getCategoryByName(String categoryName);
 
 	/**
 	 * Retrieves a list of categories whose names contain the given string. ignoring
@@ -47,26 +47,25 @@ public interface CategoryService {
 	 *         provided string. The list may be empty if no matching categories are
 	 *         found.
 	 */
-	List<CategoryEntity> getCategoriesByName(String categoryName);
+	List<CategoryDTO> getCategoriesByName(String categoryName);
 
 	/**
 	 * Retrieves all categories.
 	 * 
-	 * @return A list of {@link CategoryEntity} objects representing all categories.
+	 * @return A list of {@link CategoryDTO} objects representing all categories.
 	 */
 
-	List<CategoryEntity> getCategories();
+	List<CategoryDTO> getCategories();
 
 	/**
 	 * Update a category by its name.
 	 * 
 	 * @param categoryDTO must contain the current category name and the new name.
-	 *                    Both must not be {@code null}. The description is optional
-	 *                    description.
-	 * @return The updated {@link CategoryEntity}.
+	 *                    Both must not be {@code null}. The description is optional.
+	 * @return The updated {@link CategoryDTO}.
 	 */
 
-	CategoryEntity updateCategoryByName(UpdateCategoryDTO categoryDTO);
+	CategoryDTO updateCategoryByName(UpdateCategoryDTO categoryToUpdate);
 
 	/**
 	 * Delete a category by its name, ignoring case sensitivity.
