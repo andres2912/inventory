@@ -1,4 +1,4 @@
-package com.efitel.inventory.models.entity.inventoryItem;
+package com.efitel.inventory.models.entity.item;
 
 import java.math.BigDecimal;
 
