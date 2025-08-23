@@ -1,4 +1,4 @@
-package com.efitel.inventory.services.inventoryItem.impl;
+package com.efitel.inventory.services.item.impl;
 
 import java.util.List;
 import java.util.Locale;
@@ -14,7 +14,7 @@ import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.models.entity.inventoryItem.ItemEntity;
 import com.efitel.inventory.repository.inventoryitem.ItemRepository;
 import com.efitel.inventory.services.category.CategoryService;
-import com.efitel.inventory.services.inventoryItem.ItemService;
+import com.efitel.inventory.services.item.ItemService;
 
 import jakarta.persistence.EntityNotFoundException;
 

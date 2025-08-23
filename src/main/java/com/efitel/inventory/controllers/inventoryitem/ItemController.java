@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.efitel.inventory.models.dto.inventoryItem.ItemDTO;
 import com.efitel.inventory.models.entity.inventoryItem.ItemEntity;
-import com.efitel.inventory.services.inventoryItem.ItemService;
+import com.efitel.inventory.services.item.ItemService;
 
 import jakarta.validation.Valid;
 

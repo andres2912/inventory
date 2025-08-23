@@ -1,4 +1,4 @@
-package com.efitel.inventory.services.inventoryItem;
+package com.efitel.inventory.services.item;
 
 import java.util.List;
 
