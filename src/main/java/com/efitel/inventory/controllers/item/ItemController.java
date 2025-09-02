@@ -1,4 +1,4 @@
-package com.efitel.inventory.controllers.inventoryitem;
+package com.efitel.inventory.controllers.item;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.efitel.inventory.models.dto.inventoryItem.ItemDTO;
-import com.efitel.inventory.models.entity.inventoryItem.ItemEntity;
-import com.efitel.inventory.services.inventoryItem.ItemService;
+import com.efitel.inventory.models.dto.item.ItemDTO;
+import com.efitel.inventory.models.entity.item.ItemEntity;
+import com.efitel.inventory.services.item.ItemService;
 
 import jakarta.validation.Valid;
 
@@ -26,27 +26,27 @@ public class ItemController {
 	ItemService itemService;
 
 	@PostMapping
-	ResponseEntity<ItemEntity> createUpdateItem(@Valid @RequestBody ItemDTO Item) {
+	ResponseEntity<ItemDTO> createUpdateItem(@Valid @RequestBody ItemDTO Item) {
 		return new ResponseEntity<>(itemService.createUpdateItem(Item), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/getItemById/{itemId}")
-	ResponseEntity<ItemEntity> findItemById(@PathVariable Long itemId) {
+	ResponseEntity<ItemDTO> findItemById(@PathVariable Long itemId) {
 		return new ResponseEntity<>(itemService.findItemById(itemId), HttpStatus.OK);
 	}
 
 	@GetMapping("/getItemsByName/{itemName}")
-	ResponseEntity<List<ItemEntity>> getItemsByName(@PathVariable String itemName) {
+	ResponseEntity<List<ItemDTO>> getItemsByName(@PathVariable String itemName) {
 		return new ResponseEntity<>(itemService.findItemsByName(itemName), HttpStatus.OK);
 	}
 
 	@GetMapping("/getItemByName/{itemName}")
-	ResponseEntity<ItemEntity> getItembyName(@PathVariable String itemName) {
+	ResponseEntity<ItemDTO> getItembyName(@PathVariable String itemName) {
 		return new ResponseEntity<>(itemService.findItemByName(itemName), HttpStatus.OK);
 	}
 
 	@GetMapping("/getAllItems")
-	ResponseEntity<List<ItemEntity>> getAllItems() {
+	ResponseEntity<List<ItemDTO>> getAllItems() {
 		return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
 	}
 

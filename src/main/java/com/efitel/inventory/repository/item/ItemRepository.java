@@ -1,11 +1,11 @@
-package com.efitel.inventory.repository.inventoryitem;
+package com.efitel.inventory.repository.item;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.efitel.inventory.models.entity.inventoryItem.ItemEntity;
+import com.efitel.inventory.models.entity.item.ItemEntity;
 
 import jakarta.transaction.Transactional;
 
