@@ -58,15 +58,12 @@ public class CategoryServiceImpl implements CategoryService {
 		List<CategoryEntity> categoryEntities = new ArrayList<>();
 		List<CategoryDTO> categoryDtoList = new ArrayList<>();
 		categoryEntities = categoryRepository.findByCategoryNameContainingIgnoreCase(categoryName);
-		
+
 		for (CategoryEntity category : categoryEntities) {
 			categoryDtoList.add(categoryMapper.toCategoryDTO(category));
 		}
-		
+
 		return categoryDtoList;
-		
-		
-		
 
 	}
 
@@ -75,7 +72,7 @@ public class CategoryServiceImpl implements CategoryService {
 		List<CategoryEntity> categoryEntities = new ArrayList<>();
 		List<CategoryDTO> categoryDtoList = new ArrayList<>();
 		categoryEntities = categoryRepository.findAll();
-		
+
 		for (CategoryEntity category : categoryEntities) {
 			categoryDtoList.add(categoryMapper.toCategoryDTO(category));
 		}
