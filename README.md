@@ -4,7 +4,7 @@ This is a backend project developed with Java 17, Spring Boot, and PostgreSQL th
 
 The project was inspired by a real business need and is designed with a focus on clean architecture, scalability, and backend best practices. It follows the Model-View-Controller (MVC) architecture, making the codebase modular, maintainable, and easy to extend.
 
-##Features
+## Features
 Manage categories (create, update, delete, list).
 Manage items (create, update, delete, list).
 RESTful API endpoints with proper HTTP methods and response codes.
@@ -16,6 +16,7 @@ Database: PostgreSQL
 Architecture: MVC (Model–View–Controller)
 Build Tool: Maven
 
+```bash
 src/
  ├── main/java/com/efitel/inventory
  │    ├── controller/     # REST Controllers (API endpoints)
@@ -25,6 +26,8 @@ src/
  └── main/resources/
       ├── application.yml # Configurations
       └── schema.sql      # DB schema (if used)
+
+```
 
 
 
