@@ -29,15 +29,20 @@ public class ItemController {
 	ResponseEntity<ItemDTO> createUpdateItem(@Valid @RequestBody ItemDTO Item) {
 		return new ResponseEntity<>(itemService.createUpdateItem(Item), HttpStatus.CREATED);
 	}
-
-	@GetMapping("/getItemById/{itemId}")
-	ResponseEntity<ItemDTO> findItemById(@PathVariable Long itemId) {
-		return new ResponseEntity<>(itemService.findItemById(itemId), HttpStatus.OK);
+	
+	@GetMapping
+	ResponseEntity<List<ItemDTO>> getItems() {
+		return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/id")
+	ResponseEntity<ItemDTO> findItemById(@PathVariable Long id) {
+		return new ResponseEntity<>(itemService.findItemById(id), HttpStatus.OK);
 	}
 
-	@GetMapping("/getItemsByName/{itemName}")
-	ResponseEntity<List<ItemDTO>> getItemsByName(@PathVariable String itemName) {
-		return new ResponseEntity<>(itemService.findItemsByName(itemName), HttpStatus.OK);
+	@GetMapping("/{name}")
+	ResponseEntity<List<ItemDTO>> getItemsByName(@PathVariable String name) {
+		return new ResponseEntity<>(itemService.findItemsByName(name), HttpStatus.OK);
 	}
 
 	@GetMapping("/getItemByName/{itemName}")
@@ -45,15 +50,9 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.findItemByName(itemName), HttpStatus.OK);
 	}
 
-	@GetMapping("/getAllItems")
-	ResponseEntity<List<ItemDTO>> getAllItems() {
-		return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
-	}
-
 	@DeleteMapping("/deleteByItemName/{itemName}")
 	ResponseEntity<String> deleteByItemName(@PathVariable String itemName){
 		return new ResponseEntity<>(itemService.deleteByItemName(itemName), HttpStatus.OK);
 	}
-	
 
 }
