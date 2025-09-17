@@ -31,33 +31,35 @@ public class CategoryController {
 	public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
 		return new ResponseEntity<>(categoryService.createCategory(categoryDTO), HttpStatus.CREATED);
 	}
-
-	@GetMapping("/getCategoryById/{categoryId}")
-	public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long categoryId) {
-		return new ResponseEntity<>(categoryService.findCategoryById(categoryId), HttpStatus.OK);
-	}
-
-	@GetMapping("/getCategoryByName/{categoryName}")
-	public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String categoryName) {
-		return new ResponseEntity<>(categoryService.getCategoryByName(categoryName), HttpStatus.OK);
-	}
-
-	@GetMapping("/categoriesByName/{categoryName}")
-	public ResponseEntity<List<CategoryDTO>> categoriesByName(@PathVariable String categoryName) {
-		return new ResponseEntity<>(categoryService.getCategoriesByName(categoryName), HttpStatus.OK);
-	}
-
-	@GetMapping("/getCategories")
+	
+	@GetMapping
 	public ResponseEntity<List<CategoryDTO>> getCategories() {
 		return new ResponseEntity<>(categoryService.getCategories(), HttpStatus.OK);
 	}
-
-	@PatchMapping("/updateCategoryByName")
-	public ResponseEntity<CategoryDTO> updateCategoryByName(@RequestBody UpdateCategoryDTO categoryDTO) {
-		return new ResponseEntity<>(categoryService.updateCategoryByName(categoryDTO), HttpStatus.OK);
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<CategoryDTO> getCategoryById(@PathVariable Long id) {
+		return new ResponseEntity<>(categoryService.findCategoryById(id), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/deleteCategoryByName/{categoryName}")
+	@GetMapping("/{name}")
+	public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name) {
+		return new ResponseEntity<>(categoryService.getCategoryByName(name), HttpStatus.OK);
+	}
+
+	@GetMapping("/{name}")
+	public ResponseEntity<List<CategoryDTO>> categoriesByName(@PathVariable String name) {
+		return new ResponseEntity<>(categoryService.getCategoriesByName(name), HttpStatus.OK);
+	}
+
+	
+
+	@PatchMapping("/{id}")
+	public ResponseEntity<CategoryDTO> updateCategoryByName(@PathVariable Long id, @RequestBody UpdateCategoryDTO dataToUpdate) {
+		return new ResponseEntity<>(categoryService.updateCategoryByName(id, dataToUpdate), HttpStatus.OK);
+	}
+
+	@DeleteMapping("/{categoryName}")
 	ResponseEntity<String> deleteCategoryByName(@PathVariable String categoryName){
 		categoryService.deleteByCategoryName( categoryName);
 		return  new ResponseEntity<>(categoryService.deleteByCategoryName(categoryName), HttpStatus.OK);

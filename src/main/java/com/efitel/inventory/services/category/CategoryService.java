@@ -65,7 +65,7 @@ public interface CategoryService {
 	 * @return The updated {@link CategoryDTO}.
 	 */
 
-	CategoryDTO updateCategoryByName(UpdateCategoryDTO categoryToUpdate);
+	CategoryDTO updateCategoryByName(Long id, UpdateCategoryDTO categoryToUpdate);
 
 	/**
 	 * Delete a category by its name, ignoring case sensitivity.

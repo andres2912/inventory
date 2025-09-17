@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateCategoryDTO {
-	private Long categoryId;
 	@NotBlank
 	@NotNull
 	private String currentCategoryName;
