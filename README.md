@@ -16,6 +16,8 @@ Database: PostgreSQL
 Architecture: MVC (Model–View–Controller)
 Build Tool: Maven
 
+```bash
+
 src/
  ├── main/java/com/efitel/inventory
  │    ├── controller/     # REST Controllers (API endpoints)
@@ -25,7 +27,7 @@ src/
  └── main/resources/
       ├── application.yml # Configurations
       └── schema.sql      # DB schema (if used)
-
+```
 
 
 ## API Endpoints
