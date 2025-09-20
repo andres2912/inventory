@@ -32,11 +32,4 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
 	Optional<ItemEntity> findByItemNameIgnoreCase(String itemName);
 
-	/**
-	 * Delete an item by its name, ignore case sensitivity.
-	 * 
-	 * @param itemName The name of the item to delete. Must not be {@code null}.
-	 */
-	@Transactional
-	void deleteByItemName(String itemName);
 }

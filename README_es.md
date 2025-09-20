@@ -31,8 +31,7 @@ src/
     ├── application.yml # Configuraciones
     └── schema.sql      # Esquema de la base de datos (si aplica)
 
-```
-## Endpoints de la API
+    ## Endpoints de la API
 
 ### Categorías
 
