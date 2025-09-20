@@ -45,12 +45,7 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.findItemsByName(name), HttpStatus.OK);
 	}
 
-	@GetMapping("/getItemByName/{itemName}")
-	ResponseEntity<ItemDTO> getItembyName(@PathVariable String itemName) {
-		return new ResponseEntity<>(itemService.findItemByName(itemName), HttpStatus.OK);
-	}
-
-	@DeleteMapping("/deleteByItemName/{itemName}")
+	@DeleteMapping("/{id}")
 	ResponseEntity<String> deleteByItemName(@PathVariable String itemName){
 		return new ResponseEntity<>(itemService.deleteByItemName(itemName), HttpStatus.OK);
 	}
