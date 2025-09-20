@@ -30,10 +30,20 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryMapper categoryMapper;
 
 	@Override
-	public CategoryDTO createCategory(CategoryDTO categoryDTO) {
-		CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(categoryDTO);
-		CategoryEntity saved = categoryRepository.save(categoryEntity);
-			return categoryMapper.toCategoryDTO(saved);
+	public CategoryDTO createUpdateCategory(CategoryDTO categoryDTO) {
+		CategoryEntity categoryEntity;
+		CategoryEntity saved;
+		if (categoryDTO.getCategoryId() != null) {
+			CategoryDTO categoryToUpdate = findCategoryById(categoryDTO.getCategoryId());
+			categoryToUpdate.setCategoryName(categoryDTO.getCategoryName());
+			categoryToUpdate.setDescription(categoryDTO.getDescription());
+			categoryEntity = categoryMapper.toCategoryEntity(categoryToUpdate);
+			saved = categoryRepository.save(categoryEntity);
+		} else {
+			categoryEntity = categoryMapper.toCategoryEntity(categoryDTO);
+			saved = categoryRepository.save(categoryEntity);
+		}
+		return categoryMapper.toCategoryDTO(saved);
 	}
 
 	@Override
@@ -81,20 +91,9 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryDTO updateCategoryByName(Long id, UpdateCategoryDTO dataToUpdate) {
-		CategoryDTO categoryToUpdate = findCategoryById(id);
-		categoryToUpdate.setCategoryName(dataToUpdate.getNewCategoryName());
-		categoryToUpdate.setDescription(dataToUpdate.getDescription());
-		CategoryEntity category = categoryMapper.toCategoryEntity(categoryToUpdate);
-		CategoryEntity saved =  categoryRepository.save(category);
-		return categoryMapper.toCategoryDTO(saved);
-		
-	}
-
-	@Override
-	public String deleteByCategoryName(String categoryName) {
+	public String deleteCategoryById(Long categoryId) {
 		try {
-			categoryRepository.deleteByCategoryNameIgnoreCase(categoryName);
+			categoryRepository.deleteById(categoryId);
 			return "Category deleted succesfully";
 		} catch (Exception e) {
 			return null;

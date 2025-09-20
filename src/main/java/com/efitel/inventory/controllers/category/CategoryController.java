@@ -28,8 +28,8 @@ public class CategoryController {
 	CategoryService categoryService;
 
 	@PostMapping
-	public ResponseEntity<CategoryDTO> createCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
-		return new ResponseEntity<>(categoryService.createCategory(categoryDTO), HttpStatus.CREATED);
+	public ResponseEntity<CategoryDTO> createUpdateCategory(@Valid @RequestBody CategoryDTO categoryDTO) {
+		return new ResponseEntity<>(categoryService.createUpdateCategory(categoryDTO), HttpStatus.CREATED);
 	}
 	
 	@GetMapping
@@ -52,16 +52,9 @@ public class CategoryController {
 		return new ResponseEntity<>(categoryService.getCategoriesByName(name), HttpStatus.OK);
 	}
 
-	
-
-	@PatchMapping("/{id}")
-	public ResponseEntity<CategoryDTO> updateCategoryByName(@PathVariable Long id, @RequestBody UpdateCategoryDTO dataToUpdate) {
-		return new ResponseEntity<>(categoryService.updateCategoryByName(id, dataToUpdate), HttpStatus.OK);
-	}
-
-	@DeleteMapping("/{categoryName}")
-	ResponseEntity<String> deleteCategoryByName(@PathVariable String categoryName){
-		categoryService.deleteByCategoryName( categoryName);
-		return  new ResponseEntity<>(categoryService.deleteByCategoryName(categoryName), HttpStatus.OK);
+	@DeleteMapping("/{id}")
+	ResponseEntity<String> deleteCategoryById(@PathVariable Long id){
+		categoryService.deleteCategoryById(id);
+		return  new ResponseEntity<>(categoryService.deleteCategoryById(id), HttpStatus.OK);
 	}
 }

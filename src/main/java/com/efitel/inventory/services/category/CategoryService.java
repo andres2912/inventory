@@ -9,13 +9,13 @@ import com.efitel.inventory.models.entity.category.CategoryEntity;
 
 public interface CategoryService {
 	/**
-	 * Create and save a new category using the provided {@link CategoryDTO}.
+	 * Create or update a category using the provided {@link CategoryDTO}.
 	 * 
 	 * @param CategoryDTO The category to be created. Must not be
 	 *                       {@code null}.
 	 * @return The created {@link CategoryDTO} with generated ID field populated.
 	 */
-	CategoryDTO createCategory(CategoryDTO categoryDTO);
+	CategoryDTO createUpdateCategory(CategoryDTO categoryDTO);
 
 	/**
 	 * Retrieves a category by its unique identifier.
@@ -58,22 +58,12 @@ public interface CategoryService {
 	List<CategoryDTO> getCategories();
 
 	/**
-	 * Update a category by its name.
+	 * Delete a category by its id.
 	 * 
-	 * @param categoryToUpdate must contain the current category name and the new name.
-	 *                    Both must not be {@code null}. The description is optional.
-	 * @return The updated {@link CategoryDTO}.
-	 */
-
-	CategoryDTO updateCategoryByName(Long id, UpdateCategoryDTO categoryToUpdate);
-
-	/**
-	 * Delete a category by its name, ignoring case sensitivity.
-	 * 
-	 * @param categoryName The name of the category to delete. Must not be
+	 * @param categoryId The id of the category to delete. Must not be
 	 *                     {@code null}.
 	 * @return A confirmation message indicating the success of the operation.
 	 */
-	String deleteByCategoryName(String categoryName);
+	String deleteCategoryById(Long categoryId);
 
 }
