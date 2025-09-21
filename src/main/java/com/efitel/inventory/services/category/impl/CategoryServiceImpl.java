@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.efitel.inventory.mapper.category.CategoryMapper;
 import com.efitel.inventory.models.dto.category.CategoryDTO;
-import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.repository.category.CategoryRepository;
 import com.efitel.inventory.services.category.CategoryService;
@@ -30,10 +29,20 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryMapper categoryMapper;
 
 	@Override
-	public CategoryDTO createCategory(CategoryDTO categoryDTO) {
-		CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(categoryDTO);
-		CategoryEntity saved = categoryRepository.save(categoryEntity);
-			return categoryMapper.toCategoryDTO(saved);
+	public CategoryDTO createUpdateCategory(CategoryDTO categoryDTO) {
+		CategoryEntity categoryEntity;
+		CategoryEntity saved;
+		if (categoryDTO.getCategoryId() != null) {
+			CategoryDTO categoryToUpdate = findCategoryById(categoryDTO.getCategoryId());
+			categoryToUpdate.setCategoryName(categoryDTO.getCategoryName());
+			categoryToUpdate.setDescription(categoryDTO.getDescription());
+			categoryEntity = categoryMapper.toCategoryEntity(categoryToUpdate);
+			saved = categoryRepository.save(categoryEntity);
+		} else {
+			categoryEntity = categoryMapper.toCategoryEntity(categoryDTO);
+			saved = categoryRepository.save(categoryEntity);
+		}
+		return categoryMapper.toCategoryDTO(saved);
 	}
 
 	@Override
@@ -46,12 +55,6 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		return categoryMapper.toCategoryDTO(categoryEntity);
 	}	
-
-	@Override
-	public CategoryDTO getCategoryByName(String categoryName) {
-		CategoryEntity categoryEntity = categoryRepository.findByCategoryNameIgnoreCase(categoryName);
-		return categoryMapper.toCategoryDTO(categoryEntity);	
-	}
 
 	@Override
 	public List<CategoryDTO> getCategoriesByName(String categoryName) {
@@ -81,20 +84,9 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryDTO updateCategoryByName(UpdateCategoryDTO categoryToUpdate) {
-		CategoryDTO updateCategory = getCategoryByName(categoryToUpdate.getCurrentCategoryName());
-		updateCategory.setCategoryName(categoryToUpdate.getNewCategoryName());
-		updateCategory.setDescription(categoryToUpdate.getDescription());
-		CategoryEntity category = categoryMapper.toCategoryEntity(updateCategory);
-		CategoryEntity saved =  categoryRepository.save(category);
-		return categoryMapper.toCategoryDTO(saved);
-		
-	}
-
-	@Override
-	public String deleteByCategoryName(String categoryName) {
+	public String deleteCategoryById(Long categoryId) {
 		try {
-			categoryRepository.deleteByCategoryNameIgnoreCase(categoryName);
+			categoryRepository.deleteById(categoryId);
 			return "Category deleted succesfully";
 		} catch (Exception e) {
 			return null;

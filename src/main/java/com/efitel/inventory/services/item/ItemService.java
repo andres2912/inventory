@@ -55,11 +55,11 @@ public interface ItemService {
 	List<ItemDTO> getItems();
 
 	/**
-	 * Delete an item by its name, ignoring case sensitivity.
+	 * Delete an item by its id.
 	 * 
-	 * @param itemName The name of the item to delete. Must not be {@code null}.
+	 * @param itemId The id of the item to delete. Must not be {@code null}.
 	 * @return A confirmation message indicating the success of the operation.
 	 */
-	String deleteByItemName(String itemName);
+	String deleteByItemId(Long itemId);
 
 }

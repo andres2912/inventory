@@ -1,21 +1,18 @@
 package com.efitel.inventory.services.category;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.efitel.inventory.models.dto.category.CategoryDTO;
-import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
-import com.efitel.inventory.models.entity.category.CategoryEntity;
 
 public interface CategoryService {
 	/**
-	 * Create and save a new category using the provided {@link CategoryDTO}.
+	 * Create or update a category using the provided {@link CategoryDTO}.
 	 * 
 	 * @param CategoryDTO The category to be created. Must not be
 	 *                       {@code null}.
 	 * @return The created {@link CategoryDTO} with generated ID field populated.
 	 */
-	CategoryDTO createCategory(CategoryDTO categoryDTO);
+	CategoryDTO createUpdateCategory(CategoryDTO categoryDTO);
 
 	/**
 	 * Retrieves a category by its unique identifier.
@@ -26,16 +23,6 @@ public interface CategoryService {
 	 *         category is found.
 	 */
 	CategoryDTO findCategoryById(Long categoryId);
-
-	/**
-	 * Retrieves {@link CategoryDTO} that exactly matches the given name, ignoring
-	 * case sensitivity.
-	 * 
-	 * @param categoryName The exact name of the category to search. Must not be
-	 *                     {@code null}.
-	 * @return The matching {@link CategoryDTO}, or {@code null} if no match is found.
-	 */
-	CategoryDTO getCategoryByName(String categoryName);
 
 	/**
 	 * Retrieves a list of categories whose names contain the given string. ignoring
@@ -58,22 +45,12 @@ public interface CategoryService {
 	List<CategoryDTO> getCategories();
 
 	/**
-	 * Update a category by its name.
+	 * Delete a category by its id.
 	 * 
-	 * @param categoryToUpdate must contain the current category name and the new name.
-	 *                    Both must not be {@code null}. The description is optional.
-	 * @return The updated {@link CategoryDTO}.
-	 */
-
-	CategoryDTO updateCategoryByName(UpdateCategoryDTO categoryToUpdate);
-
-	/**
-	 * Delete a category by its name, ignoring case sensitivity.
-	 * 
-	 * @param categoryName The name of the category to delete. Must not be
+	 * @param categoryId The id of the category to delete. Must not be
 	 *                     {@code null}.
 	 * @return A confirmation message indicating the success of the operation.
 	 */
-	String deleteByCategoryName(String categoryName);
+	String deleteCategoryById(Long categoryId);
 
 }
