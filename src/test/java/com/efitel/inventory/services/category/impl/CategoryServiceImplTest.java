@@ -3,7 +3,11 @@ package com.efitel.inventory.services.category.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,6 +36,16 @@ class CategoryServiceImplTest {
 	@Mock
 	CategoryMapper categoryMapper;
 
+	private CategoryEntity savedEntity;
+
+	@BeforeEach
+	void setUp() {
+		savedEntity = new CategoryEntity();
+		savedEntity.setCategoryId(1L);
+		savedEntity.setCategoryName("categoryTest");
+		savedEntity.setDescription("category description");
+	}
+
 	@Test
 	void createCategoryTest() {
 		CategoryDTO categoryToSave = new CategoryDTO();
@@ -39,24 +53,20 @@ class CategoryServiceImplTest {
 		categoryToSave.setDescription("category description");
 
 		CategoryEntity mappedEntity = new CategoryEntity();
-		mappedEntity.setCategoryName("categoryTest");
-		mappedEntity.setDescription("category description");
-
-		CategoryEntity savedEntity = new CategoryEntity();
-		savedEntity.setCategoryId(1L);
-		savedEntity.setCategoryName("categoryTest");
-		savedEntity.setDescription("category description");
+		mappedEntity.setCategoryId(categoryToSave.getCategoryId());
+		mappedEntity.setCategoryName(categoryToSave.getCategoryName());
+		mappedEntity.setDescription(categoryToSave.getDescription());
 
 		CategoryDTO savedCategoryDto = new CategoryDTO();
-		savedCategoryDto.setCategoryId(1L);
-		savedCategoryDto.setCategoryName("categoryTest");
-		savedCategoryDto.setDescription("category description");
+		savedCategoryDto.setCategoryId(savedEntity.getCategoryId());
+		savedCategoryDto.setCategoryName(savedEntity.getCategoryName());
+		savedCategoryDto.setDescription(savedEntity.getDescription());
 
-		when(categoryMapper.toCategoryEntity(categoryToSave)).thenReturn(mappedEntity);
+		when(categoryMapper.toCategoryEntity(any(CategoryDTO.class))).thenReturn(mappedEntity);
 		when(categoryMapper.toCategoryDTO(savedEntity)).thenReturn(savedCategoryDto);
 		when(categoryRepository.save(any(CategoryEntity.class))).thenReturn(savedEntity);
 
-		CategoryDTO savedCategory = categoryServiceImpl.createCategory(categoryToSave);
+		CategoryDTO savedCategory = categoryServiceImpl.createUpdateCategory(categoryToSave);
 
 		assertNotNull(savedCategory);
 		assertEquals(savedCategoryDto.getCategoryId(), savedCategory.getCategoryId());
@@ -68,9 +78,45 @@ class CategoryServiceImplTest {
 		inOrder.verify(categoryRepository).save(any(CategoryEntity.class));
 		inOrder.verify(categoryMapper).toCategoryDTO(savedEntity);
 	}
-	
+
 	@Test
-	void findCategoryByIdTest() {
+	void updateCategoryTest() {
+		CategoryDTO category = new CategoryDTO();
+		category.setCategoryId(1L);
+		category.setCategoryName("Category to update");
+		category.setDescription("Category updated");
+
+		CategoryEntity categoryUpdated = new CategoryEntity();
+		categoryUpdated.setCategoryId(savedEntity.getCategoryId());
+		categoryUpdated.setCategoryName(category.getCategoryName());
+		categoryUpdated.setDescription(category.getDescription());
 		
+		CategoryDTO existingCategoryDto = new CategoryDTO();
+		existingCategoryDto.setCategoryId(savedEntity.getCategoryId());
+		existingCategoryDto.setCategoryName(savedEntity.getCategoryName());
+		existingCategoryDto.setDescription(savedEntity.getDescription());
+		
+		CategoryDTO savedCategoryDto = new CategoryDTO();
+		savedCategoryDto.setCategoryId(category.getCategoryId());
+		savedCategoryDto.setCategoryName(category.getCategoryName());
+		savedCategoryDto.setDescription(category.getDescription());
+		
+		when(categoryMapper.toCategoryDTO(eq(savedEntity))).thenReturn(existingCategoryDto);
+		when(categoryMapper.toCategoryDTO(eq(categoryUpdated))).thenReturn(savedCategoryDto);
+		when(categoryMapper.toCategoryEntity(any(CategoryDTO.class))).thenReturn(categoryUpdated);
+		when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(savedEntity));
+		when(categoryRepository.save(any(CategoryEntity.class))).thenReturn(categoryUpdated);
+		
+		CategoryDTO CategoryUpdated = categoryServiceImpl.createUpdateCategory(category);
+		
+		assertNotNull(CategoryUpdated);
+		assertEquals(savedEntity.getCategoryId(), CategoryUpdated.getCategoryId());
+		assertEquals(category.getCategoryName(), CategoryUpdated.getCategoryName());
+		assertEquals(category.getDescription(), CategoryUpdated.getDescription());
+		
+		InOrder inOrder = Mockito.inOrder(categoryMapper, categoryRepository);
+		inOrder.verify(categoryRepository).findById(anyLong());
+		inOrder.verify(categoryRepository).save(any(CategoryEntity.class));
+		inOrder.verify(categoryMapper).toCategoryDTO(categoryUpdated);
 	}
 }
