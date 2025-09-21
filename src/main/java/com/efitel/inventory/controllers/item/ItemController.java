@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.efitel.inventory.models.dto.item.ItemDTO;
-import com.efitel.inventory.models.entity.item.ItemEntity;
 import com.efitel.inventory.services.item.ItemService;
 
 import jakarta.validation.Valid;
@@ -40,14 +40,14 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.findItemById(id), HttpStatus.OK);
 	}
 
-	@GetMapping("/{name}")
-	ResponseEntity<List<ItemDTO>> getItemsByName(@PathVariable String name) {
+	@GetMapping("/{search}")
+	ResponseEntity<List<ItemDTO>> getItemsByName(@RequestParam String name) {
 		return new ResponseEntity<>(itemService.findItemsByName(name), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	ResponseEntity<String> deleteByItemName(@PathVariable String itemName){
-		return new ResponseEntity<>(itemService.deleteByItemName(itemName), HttpStatus.OK);
+	ResponseEntity<String> deleteByItemId(@PathVariable Long id){
+		return new ResponseEntity<>(itemService.deleteByItemId(id), HttpStatus.OK);
 	}
 
 }

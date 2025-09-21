@@ -7,16 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.efitel.inventory.models.dto.category.CategoryDTO;
-import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
-import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.services.category.CategoryService;
 
 import jakarta.validation.Valid;
@@ -42,13 +40,8 @@ public class CategoryController {
 		return new ResponseEntity<>(categoryService.findCategoryById(id), HttpStatus.OK);
 	}
 
-	@GetMapping("/{name}")
-	public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name) {
-		return new ResponseEntity<>(categoryService.getCategoryByName(name), HttpStatus.OK);
-	}
-
-	@GetMapping("/{name}")
-	public ResponseEntity<List<CategoryDTO>> categoriesByName(@PathVariable String name) {
+	@GetMapping("/{search}")
+	public ResponseEntity<List<CategoryDTO>> categoriesByName(@RequestParam String name) {
 		return new ResponseEntity<>(categoryService.getCategoriesByName(name), HttpStatus.OK);
 	}
 

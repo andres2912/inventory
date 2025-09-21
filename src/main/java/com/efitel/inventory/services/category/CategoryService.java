@@ -1,11 +1,8 @@
 package com.efitel.inventory.services.category;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.efitel.inventory.models.dto.category.CategoryDTO;
-import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
-import com.efitel.inventory.models.entity.category.CategoryEntity;
 
 public interface CategoryService {
 	/**
@@ -26,16 +23,6 @@ public interface CategoryService {
 	 *         category is found.
 	 */
 	CategoryDTO findCategoryById(Long categoryId);
-
-	/**
-	 * Retrieves {@link CategoryDTO} that exactly matches the given name, ignoring
-	 * case sensitivity.
-	 * 
-	 * @param categoryName The exact name of the category to search. Must not be
-	 *                     {@code null}.
-	 * @return The matching {@link CategoryDTO}, or {@code null} if no match is found.
-	 */
-	CategoryDTO getCategoryByName(String categoryName);
 
 	/**
 	 * Retrieves a list of categories whose names contain the given string. ignoring

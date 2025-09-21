@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.efitel.inventory.mapper.category.CategoryMapper;
 import com.efitel.inventory.models.dto.category.CategoryDTO;
-import com.efitel.inventory.models.dto.category.UpdateCategoryDTO;
 import com.efitel.inventory.models.entity.category.CategoryEntity;
 import com.efitel.inventory.repository.category.CategoryRepository;
 import com.efitel.inventory.services.category.CategoryService;
@@ -56,12 +55,6 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		return categoryMapper.toCategoryDTO(categoryEntity);
 	}	
-
-	@Override
-	public CategoryDTO getCategoryByName(String categoryName) {
-		CategoryEntity categoryEntity = categoryRepository.findByCategoryNameIgnoreCase(categoryName);
-		return categoryMapper.toCategoryDTO(categoryEntity);	
-	}
 
 	@Override
 	public List<CategoryDTO> getCategoriesByName(String categoryName) {
