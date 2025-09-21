@@ -114,9 +114,9 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public String deleteByItemName(String itemName) {
+	public String deleteByItemId(Long itemId) {
 		try {
-			itemRepository.deleteByItemName(itemName);
+			itemRepository.deleteById(itemId);
 			return "Item deleted successfully";
 		} catch (Exception e) {
 			return null;
