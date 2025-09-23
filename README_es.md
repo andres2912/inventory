@@ -23,15 +23,19 @@ Sigue la arquitectura Modelo-Vista-Controlador (MVC), lo que hace que el código
 ```bash
 src/
 ├── main/java/com/efitel/inventory
+│   ├── config/         # Configuración de la aplicación (beans, mensajes, etc.)
 │   ├── controller/     # Controladores REST (endpoints de la API)
-│   ├── service/        # Lógica de negocio
-│   ├── repository/     # Acceso a la base de datos (JPA)
-│   └── model/          # Entidades y DTOs
+│   ├── exception/      # Manejo global de excepciones
+│   ├── mapper/         # Mapeo entre Entidades y DTOs
+│   ├── models/         # Entidades (JPA) y DTOs
+│   ├── repository/     # Capa de persistencia de datos (Spring Data JPA)
+│   └── services/       # Lógica de negocio
 └── main/resources/
-    ├── application.yml # Configuraciones
-    └── schema.sql      # Esquema de la base de datos (si aplica)
+    ├── application.properties   # Configuración principal de la aplicación
+    └── messages.properties      # Mensajes
+```
 
-    ## Endpoints de la API
+ ## Endpoints de la API
 
 ### Categorías
 
