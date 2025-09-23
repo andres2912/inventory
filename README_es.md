@@ -14,7 +14,7 @@ Sigue la arquitectura Modelo-Vista-Controlador (MVC), lo que hace que el código
 
 
 ## Tecnologías
-- cLenguaje:** Java 17  
+- **Lenguaje:** Java 17  
 - **Frameworks:** Spring Boot, Spring Data JPA  
 - **Base de datos:** PostgreSQL  
 - **Arquitectura:** MVC (Modelo–Vista–Controlador)  
