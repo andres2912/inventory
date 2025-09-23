@@ -35,12 +35,12 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/id")
+	@GetMapping("{/id}")
 	ResponseEntity<ItemDTO> findItemById(@PathVariable Long id) {
 		return new ResponseEntity<>(itemService.findItemById(id), HttpStatus.OK);
 	}
 
-	@GetMapping("/{search}")
+	@GetMapping("/search")
 	ResponseEntity<List<ItemDTO>> getItemsByName(@RequestParam String name) {
 		return new ResponseEntity<>(itemService.findItemsByName(name), HttpStatus.OK);
 	}

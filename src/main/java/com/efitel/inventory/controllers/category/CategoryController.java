@@ -40,7 +40,7 @@ public class CategoryController {
 		return new ResponseEntity<>(categoryService.findCategoryById(id), HttpStatus.OK);
 	}
 
-	@GetMapping("/{search}")
+	@GetMapping("/search")
 	public ResponseEntity<List<CategoryDTO>> categoriesByName(@RequestParam String name) {
 		return new ResponseEntity<>(categoryService.getCategoriesByName(name), HttpStatus.OK);
 	}
