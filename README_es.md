@@ -49,7 +49,7 @@ src/
 | GET    | `/categories`                  | Obtener todas las categorías                |
 | GET    | `/categories/{id}`             | Obtener una categoría por ID                |
 | GET    | `/categories/search?name=abc`  | Buscar múltiples categorías por nombre      |
-| DELETE | `/categories/by-name/{name}`   | Eliminar una categoría por nombre           |
+| DELETE | `/categories/{id}`             | Eliminar una categoría por su ID            |
 
 ---
 
