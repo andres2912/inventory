@@ -7,10 +7,12 @@ El proyecto fue inspirado en una necesidad empresarial real y está diseñado co
 Sigue la arquitectura Modelo-Vista-Controlador (MVC), lo que hace que el código sea modular, mantenible y fácil de extender.
 
 
+
 ## Características
 - Gestión de categorías (crear, actualizar, eliminar, listar).  
 - Gestión de productos (crear, actualizar, eliminar, listar).  
 - Endpoints RESTful con métodos HTTP adecuados y códigos de respuesta correctos.  
+
 
 
 ## Tecnologías
@@ -19,6 +21,7 @@ Sigue la arquitectura Modelo-Vista-Controlador (MVC), lo que hace que el código
 - **Base de datos:** PostgreSQL  
 - **Arquitectura:** MVC (Modelo–Vista–Controlador)  
 - **Herramienta de construcción:** Maven  
+
 
 
 ## Estructura del proyecto
@@ -39,12 +42,15 @@ src/
 ```
 
 
+
+## Endpoints de la API
 ## Endpoints de la API
 
 ### Categorías
 
 | Método | Endpoint                       | Descripción                                 |
 |--------|--------------------------------|---------------------------------------------|
+| POST   | `/categories`                  | Crear una ó actualiza una categoría         |
 | POST   | `/categories`                  | Crear una ó actualiza una categoría         |
 | GET    | `/categories`                  | Obtener todas las categorías                |
 | GET    | `/categories/{id}`             | Obtener una categoría por ID                |
