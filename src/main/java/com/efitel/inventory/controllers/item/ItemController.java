@@ -30,12 +30,17 @@ public class ItemController {
 		return new ResponseEntity<>(itemService.createUpdateItem(Item), HttpStatus.CREATED);
 	}
 	
+	@PostMapping("/items")
+	ResponseEntity<List<ItemDTO>> createItems(@Valid @RequestBody List<ItemDTO> items){
+		return new ResponseEntity<>(itemService.createItems(items), HttpStatus.CREATED);
+	}
+	
 	@GetMapping
 	ResponseEntity<List<ItemDTO>> getItems() {
 		return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
 	}
 	
-	@GetMapping("{/id}")
+	@GetMapping("/{id}")
 	ResponseEntity<ItemDTO> findItemById(@PathVariable Long id) {
 		return new ResponseEntity<>(itemService.findItemById(id), HttpStatus.OK);
 	}

@@ -19,6 +19,7 @@ public class ItemDTO {
 	@NotBlank(message = "itemName is mandatory.")
 	private String itemName;
 	private BigDecimal price;
+	private Long cantidad;
 	private String description;
 	private CategoryEntity category;
 

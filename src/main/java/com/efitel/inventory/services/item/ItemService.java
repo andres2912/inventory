@@ -15,7 +15,17 @@ public interface ItemService {
 	 * @return The created {@link ItemDTO} with generated ID field populated.
 	 */
 	ItemDTO createUpdateItem(ItemDTO itemDTO);
-
+	
+	/**
+	 * Create new inventory items in the system.<br>
+	 * This operation persists a list of items into the inventory and returns the
+	 * successfully created items. Each {@link ItemDTO}<br>
+	 * @param items the list of {@link ItemDTO} objects containing the details of each item to create;
+	 * must not be {@code null} or empty
+	 * @return a list of {@link ItemDTO} representing the created items, including any system-generated fields
+	 */
+	List<ItemDTO> createItems(List<ItemDTO> items);
+	
 	/**
 	 * Retrieves an item by its unique identifier.
 	 * 
