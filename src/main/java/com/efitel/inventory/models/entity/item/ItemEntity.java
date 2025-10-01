@@ -28,8 +28,10 @@ public class ItemEntity {
 	private Long itemId;
 	@Column(name = "item_name", nullable = false, unique = true)
 	private String itemName;
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private BigDecimal price;
+	@Column(name = "cantidad", nullable = false)
+	private Long cantidad;
 	@Column(columnDefinition = "TEXT")
 	private String description;
 	@ManyToOne

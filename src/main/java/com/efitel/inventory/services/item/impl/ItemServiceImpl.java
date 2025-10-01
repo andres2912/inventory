@@ -56,7 +56,26 @@ public class ItemServiceImpl implements ItemService {
 		return itemMapper.toItemDTO(saved);
 
 	}
+	
+	@Override
+	public List<ItemDTO> createItems(List<ItemDTO> itemDTOs) {
+	    List<ItemEntity> itemEntities = itemDTOs.stream()
+	        .map(dto -> {
+	            CategoryDTO categoryDTO = categoryService.findCategoryById(dto.getCategoryId());
+	            CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(categoryDTO);
+	            ItemEntity entity = itemMapper.toItemEntity(dto);
+	            entity.setCategory(categoryEntity);
 
+	            return entity;
+	        })
+	        .toList();
+
+	    List<ItemEntity> savedItemEntities = itemRepository.saveAll(itemEntities);
+	    return savedItemEntities.stream()
+	            .map(itemMapper::toItemDTO)
+	            .toList();
+	}
+	
 	@Override
 	public ItemDTO findItemById(Long itemId) {
 		ItemEntity itemEntity = itemRepository.findById(itemId).orElseThrow(() -> {
