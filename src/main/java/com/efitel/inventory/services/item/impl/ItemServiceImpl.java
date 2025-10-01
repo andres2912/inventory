@@ -61,24 +61,16 @@ public class ItemServiceImpl implements ItemService {
 	public List<ItemDTO> createItems(List<ItemDTO> itemDTOs) {
 	    List<ItemEntity> itemEntities = itemDTOs.stream()
 	        .map(dto -> {
-	            // 1. Fetch category by ID
 	            CategoryDTO categoryDTO = categoryService.findCategoryById(dto.getCategoryId());
 	            CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(categoryDTO);
-
-	            // 2. Map DTO to Entity
 	            ItemEntity entity = itemMapper.toItemEntity(dto);
-
-	            // 3. Attach the CategoryEntity
 	            entity.setCategory(categoryEntity);
 
 	            return entity;
 	        })
 	        .toList();
 
-	    // Save all at once
 	    List<ItemEntity> savedItemEntities = itemRepository.saveAll(itemEntities);
-
-	    // Map back to DTOs
 	    return savedItemEntities.stream()
 	            .map(itemMapper::toItemDTO)
 	            .toList();
